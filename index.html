@@ -11,11 +11,68 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <a class="landing" href="families.html" aria-label="Open invitation">
-    <h1 class="names script">Ayush &amp; Vedika</h1>
-    <div class="divider"></div>
-    <p class="date">24 · Nov · 2026</p>
-    <p class="tap-hint">Tap to open</p>
-  </a>
+  <!-- Background song: put your file at audio/song.mp3 -->
+  <audio id="song" src="audio/song.mp3" loop preload="auto"></audio>
+  <button id="music-toggle" class="music-toggle" type="button" hidden aria-label="Play music">♪</button>
+
+  <!-- Home -->
+  <section id="home" class="view">
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="en">English</button>
+      <button type="button" data-lang="hi">हिंदी</button>
+    </div>
+    <div class="landing" id="open-invite" role="button" tabindex="0">
+      <h1 class="names script" data-t="names"></h1>
+      <div class="divider"></div>
+      <p class="date" data-t="date"></p>
+      <p class="tap-hint" data-t="tap"></p>
+    </div>
+  </section>
+
+  <!-- Choose family -->
+  <section id="families" class="view" hidden>
+    <main class="page">
+      <a class="back" href="#home" data-t="home"></a>
+      <h1 class="script" data-t="functionsTitle"></h1>
+      <div class="divider"></div>
+      <p class="subtitle" data-t="chooseFamily"></p>
+      <div class="choices">
+        <a class="choice" href="#groom">
+          <div class="icon">🤵</div>
+          <div class="label script" data-t="groomSide"></div>
+          <div class="who" data-t="groomFamily"></div>
+        </a>
+        <a class="choice" href="#bride">
+          <div class="icon">👰</div>
+          <div class="label script" data-t="brideSide"></div>
+          <div class="who" data-t="brideFamily"></div>
+        </a>
+      </div>
+    </main>
+  </section>
+
+  <!-- Groom's functions -->
+  <section id="groom" class="view" hidden>
+    <main class="page">
+      <a class="back" href="#families" data-t="back"></a>
+      <h1 class="script" data-t="groomSide"></h1>
+      <div class="divider"></div>
+      <p class="subtitle" data-t="groomFunctions"></p>
+      <ul class="events" data-events="groom"></ul>
+    </main>
+  </section>
+
+  <!-- Bride's functions -->
+  <section id="bride" class="view" hidden>
+    <main class="page">
+      <a class="back" href="#families" data-t="back"></a>
+      <h1 class="script" data-t="brideSide"></h1>
+      <div class="divider"></div>
+      <p class="subtitle" data-t="brideFunctions"></p>
+      <ul class="events" data-events="bride"></ul>
+    </main>
+  </section>
+
+  <script src="js/app.js"></script>
 </body>
 </html>

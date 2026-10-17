@@ -2,19 +2,19 @@
 
 Static wedding invitation site for **24 November 2026**, hosted on GitHub Pages.
 
-## Pages
+## How it works
 
-| File | What it shows |
-|---|---|
-| `index.html` | Landing page: "Ayush & Vedika" / 24 · Nov · 2026 — tap to open |
-| `families.html` | Choose Groom's side or Bride's side |
-| `groom.html` | Ayush's family function list |
-| `bride.html` | Vedika's family function list |
+Everything lives in `index.html` as one page (so the music keeps playing), with four views:
+home → choose family → groom's side / bride's side. `families.html`, `groom.html` and
+`bride.html` only redirect to the matching view for old links.
+
+The home page has an **English / हिंदी** switch; the choice is remembered on that device.
 
 ## Customising
 
-- **Background photo:** replace `images/background.jpg` with your own photo (keep the same file name). The current one is a placeholder from Unsplash.
-- **Functions:** edit the `<li class="event">` blocks in `groom.html` and `bride.html` (day, month, name, time, venue). The current dates and functions are placeholders.
+- **Functions and all text (English + Hindi):** edit `js/app.js` — `TEXT` for page text, `EVENTS` for each side's functions.
+- **Background photo:** replace `images/background.jpg` with your own photo (keep the same file name).
+- **Background song:** add the file as `audio/song.mp3`. It starts when a guest taps "Tap to open"; the ♪ button (bottom-right) pauses/resumes it. The button stays hidden until the file exists.
 - **Colours:** change the variables at the top of `css/style.css`.
 
 ## Preview locally
