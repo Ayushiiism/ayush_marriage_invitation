@@ -11,9 +11,11 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-view="home">
+  <div class="backdrop"></div>
+  <div class="photo-panel"></div>
   <!-- Background song: put your file at audio/song.mp3 -->
   <audio id="song" src="audio/song.mp3" loop preload="auto"></audio>
-  <button id="music-toggle" class="music-toggle" type="button" hidden aria-label="Play music">♪</button>
+  <button id="music-toggle" class="music-toggle" type="button" hidden aria-label="Play music"></button>
 
   <!-- Home -->
   <section id="home" class="view">
@@ -38,7 +40,7 @@
       <p class="subtitle" data-t="chooseFamily"></p>
       <div class="choices">
         <a class="choice" href="#groom">
-          <img class="choice-photo" src="images/groom-card.jpg" alt="Ayush">
+          <img class="choice-photo" src="images/groom-card.jpg" alt="Ayush" style="object-position: 50% 45%">
           <div class="label script" data-t="groomSide"></div>
           <div class="who" data-t="groomFamily"></div>
         </a>

@@ -142,13 +142,20 @@ window.addEventListener("hashchange", show);
 const song = document.getElementById("song");
 const toggle = document.getElementById("music-toggle");
 
+const ICON_ON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M14.5 8.5a5 5 0 0 1 0 7M17 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+const ICON_OFF = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16 9l6 6M22 9l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+
 function syncToggle() {
+  toggle.innerHTML = song.paused ? ICON_OFF : ICON_ON;
   toggle.classList.toggle("playing", !song.paused);
   toggle.setAttribute("aria-label", song.paused ? "Play music" : "Pause music");
 }
 function playSong() { song.play().catch(() => {}); }
 
-song.addEventListener("canplay", () => { toggle.hidden = false; }, { once: true });
+// Show the button once the song is usable (it may already be loaded before this script runs)
+function showToggle() { toggle.hidden = false; syncToggle(); }
+if (song.readyState >= 2) showToggle();
+["loadeddata", "canplay", "play"].forEach((e) => song.addEventListener(e, showToggle));
 song.addEventListener("play", syncToggle);
 song.addEventListener("pause", syncToggle);
 toggle.addEventListener("click", () => (song.paused ? playSong() : song.pause()));
@@ -175,7 +182,7 @@ show();
 
 // Warm up the other views' photos so switching is instant
 window.addEventListener("load", () => {
-  ["families", "groom-bg", "bride-bg", "groom-card", "bride-card"].forEach((n) => {
+  ["families", "groom-bg", "bride-bg", "home-tall", "home-wide", "groom-card", "bride-card"].forEach((n) => {
     new Image().src = `images/${n}.jpg`;
   });
 });
