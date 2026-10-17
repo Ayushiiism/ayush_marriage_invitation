@@ -29,3 +29,5 @@ python3 -m http.server 8000
 1. Push to `main`.
 2. On GitHub: **Settings → Pages → Build and deployment → Source: Deploy from a branch**, Branch: `main`, folder: `/ (root)` → Save.
 3. After a minute the site is live at `https://ayushiiism.github.io/ayush_marriage_invitation/`.
+
+> After changing `css/style.css` or `js/app.js`, bump the `?v=` number on their links in `index.html` so browsers fetch the new version instead of a cached one.
