@@ -14,7 +14,7 @@
 html, body { min-height: 100%; }
 
 body {
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "Cormorant Garamond", "Tiro Devanagari Hindi", Georgia, serif;
   color: var(--cream);
   background: #1a080c var(--bg-image) center / cover no-repeat fixed;
   min-height: 100vh;
