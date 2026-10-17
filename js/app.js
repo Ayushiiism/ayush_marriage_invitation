@@ -36,7 +36,7 @@ const TEXT = {
 
 // ===== Venues =====
 const HOME = {
-  en: "निवास स्थान · Kazakpur Colony, Opp. Taramandal, near Bombay Security Office",
+  en: "Residence · Kazakpur Colony, Opp. Taramandal, near Bombay Security Office",
   hi: "निवास स्थान · कजाकपुर कॉलोनी, तारामंडल के सामने, बॉम्बे सिक्योरिटी ऑफिस के पास",
 };
 const RESORT = {
@@ -53,7 +53,7 @@ const EVENTS = {
   groom: [
     { day: 20, en: ["Ramayan Path", `Begins · ${HOME.en}`],
                hi: ["रामायण पाठ", `आरंभ · ${HOME.hi}`] },
-    { day: 21, en: ["पूर्णाहुति", `Completion of Ramayan Path · ${HOME.en}`],
+    { day: 21, en: ["Purnahuti", `Completion of Ramayan Path · ${HOME.en}`],
                hi: ["पूर्णाहुति", `रामायण पाठ का समापन · ${HOME.hi}`] },
     { day: 22, en: ["Haldi", `Afternoon · ${HOME.en}`],
                hi: ["हल्दी", `दोपहर · ${HOME.hi}`] },
