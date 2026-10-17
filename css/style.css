@@ -5,8 +5,7 @@
   --cream: #fff8ec;
   --maroon: #7a1f2b;
   --overlay: rgba(25, 8, 12, 0.55);
-  /* Swap images/background.jpg with your own photo (keep the same name) */
-  --bg-image: url("../images/background.jpg");
+  --bg-image: url("../images/home-wide.jpg");
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -19,6 +18,21 @@ body {
   background: #1a080c var(--bg-image) center / cover no-repeat fixed;
   min-height: 100vh;
 }
+
+/* Each view has its own photo (body[data-view] is set in js/app.js) */
+body[data-view="home"]     { --bg-image: url("../images/home-wide.jpg"); }
+body[data-view="families"] { --bg-image: url("../images/families.jpg"); }
+body[data-view="groom"]    { --bg-image: url("../images/groom-bg.jpg"); }
+body[data-view="bride"]    { --bg-image: url("../images/bride-bg.jpg"); }
+/* Home: keep faces clear — photo anchored to the top, text at the top, darkest behind the text */
+body[data-view="home"] { background-position: center top; }
+body[data-view="home"]::before {
+  background: linear-gradient(to bottom, rgba(25, 8, 12, 0.8) 0%, rgba(25, 8, 12, 0.45) 45%, rgba(25, 8, 12, 0.1) 100%);
+}
+@media (max-aspect-ratio: 1/1) {
+  body[data-view="home"]   { --bg-image: url("../images/home-tall.jpg"); }
+}
+body { transition: background-image 0.4s ease; }
 
 /* Dark overlay so text stays readable over any photo */
 body::before {
@@ -99,14 +113,14 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
-  padding: 24px 16px;
+  padding: max(72px, 10vh) 16px 24px;
   cursor: pointer;
 }
 
 .landing .names {
-  font-size: clamp(3.5rem, 13vw, 8rem);
+  font-size: clamp(3rem, min(13vw, 15vh), 8rem);
   color: var(--gold);
   line-height: 1.1;
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
@@ -129,7 +143,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .tap-hint {
-  margin-top: 48px;
+  margin-top: 24px;
   font-size: 1rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -195,7 +209,15 @@ a { color: inherit; text-decoration: none; }
   outline: none;
 }
 
-.choice .icon { font-size: 2.5rem; }
+.choice-photo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 18%;
+  border: 2px solid var(--gold);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
 .choice .label { font-size: 2.6rem; color: var(--gold); margin: 8px 0; }
 .choice .who { font-size: 1.15rem; letter-spacing: 0.1em; }
 
@@ -240,6 +262,15 @@ a { color: inherit; text-decoration: none; }
 @keyframes pulse {
   0%, 100% { opacity: 0.5; }
   50%      { opacity: 1; }
+}
+
+/* Short, wide screens (small laptops): compact the home text so it clears the couple */
+@media (min-aspect-ratio: 1/1) and (max-height: 680px) {
+  .landing { padding-top: 32px; }
+  .landing .names { font-size: clamp(3rem, 12vh, 8rem); }
+  .divider { margin: 10px auto; }
+  .landing .date { margin-top: 0; }
+  .tap-hint { margin-top: 10px; }
 }
 
 @media (max-width: 520px) {

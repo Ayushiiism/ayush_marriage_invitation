@@ -133,6 +133,7 @@ function show() {
   const id = location.hash.slice(1);
   const current = VIEWS.includes(id) ? id : "home";
   VIEWS.forEach((v) => { document.getElementById(v).hidden = v !== current; });
+  document.body.dataset.view = current;
   window.scrollTo(0, 0);
 }
 window.addEventListener("hashchange", show);
@@ -171,3 +172,10 @@ document.addEventListener("click", function first() {
 
 render();
 show();
+
+// Warm up the other views' photos so switching is instant
+window.addEventListener("load", () => {
+  ["families", "groom-bg", "bride-bg", "groom-card", "bride-card"].forEach((n) => {
+    new Image().src = `images/${n}.jpg`;
+  });
+});

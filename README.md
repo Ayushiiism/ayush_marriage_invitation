@@ -13,7 +13,7 @@ The home page has an **English / हिंदी** switch; the choice is remembe
 ## Customising
 
 - **Functions and all text (English + Hindi):** edit `js/app.js` — `TEXT` for page text, `EVENTS` for each side's functions.
-- **Background photo:** replace `images/background.jpg` with your own photo (keep the same file name).
+- **Photos:** in `images/` — `home-wide.jpg` (home on laptops), `home-tall.jpg` (home on phones), `families.jpg`, `groom-bg.jpg`, `bride-bg.jpg`, and the round card photos `groom-card.jpg` / `bride-card.jpg`. Replace any file (same name) to swap it; keep them under ~500 KB.
 - **Background song:** add the file as `audio/song.mp3`. It starts when a guest taps "Tap to open"; the ♪ button (bottom-right) pauses/resumes it. The button stays hidden until the file exists.
 - **Colours:** change the variables at the top of `css/style.css`.
 

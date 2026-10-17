@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-view="home">
   <!-- Background song: put your file at audio/song.mp3 -->
   <audio id="song" src="audio/song.mp3" loop preload="auto"></audio>
   <button id="music-toggle" class="music-toggle" type="button" hidden aria-label="Play music">♪</button>
@@ -38,12 +38,12 @@
       <p class="subtitle" data-t="chooseFamily"></p>
       <div class="choices">
         <a class="choice" href="#groom">
-          <div class="icon">🤵</div>
+          <img class="choice-photo" src="images/groom-card.jpg" alt="Ayush">
           <div class="label script" data-t="groomSide"></div>
           <div class="who" data-t="groomFamily"></div>
         </a>
         <a class="choice" href="#bride">
-          <div class="icon">👰</div>
+          <img class="choice-photo" src="images/bride-card.jpg" alt="Vedika">
           <div class="label script" data-t="brideSide"></div>
           <div class="who" data-t="brideFamily"></div>
         </a>
