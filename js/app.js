@@ -15,6 +15,9 @@ const TEXT = {
     brideFamily: "Vedika's Family",
     brideFunctions: "Vedika's Family Functions",
     month: "Nov",
+    directions: "Directions",
+    daysToGo: (n) => (n === 1 ? "1 day to go" : `${n} days to go`),
+    today: "The big day is today!",
   },
   hi: {
     names: "आयुष संग वेदिका",
@@ -31,6 +34,9 @@ const TEXT = {
     brideFamily: "वेदिका का परिवार",
     brideFunctions: "वेदिका के परिवार के समारोह",
     month: "नवम्बर",
+    directions: "रास्ता देखें",
+    daysToGo: (n) => `${n} दिन शेष`,
+    today: "आज शुभ विवाह का दिन है!",
   },
 };
 
@@ -38,51 +44,54 @@ const TEXT = {
 const HOME = {
   en: "Residence · Kazakpur Colony, Opp. Taramandal, near Bombay Security Office",
   hi: "निवास स्थान · कजाकपुर कॉलोनी, तारामंडल के सामने, बॉम्बे सिक्योरिटी ऑफिस के पास",
+  map: "Kazakpur Colony, Taramandal, Gorakhpur",
 };
 const RESORT = {
   en: "Moon & Mars Resort, Kanpur",
   hi: "मून एंड मार्स रिज़ॉर्ट, कानपुर",
+  map: "Moon & Mars Resort, Kanpur",
 };
 const PALACE = {
   en: "Manokamna Palace, Bhagat Chauraha, Gorakhpur",
   hi: "मनोकामना पैलेस, भगत चौराहा, गोरखपुर",
+  map: "Manokamna Palace, Bhagat Chauraha, Gorakhpur",
 };
 
 // ===== Functions: edit dates, names and details here =====
 const EVENTS = {
   groom: [
     { day: 20, en: ["Ramayan Path", `Begins · ${HOME.en}`],
-               hi: ["रामायण पाठ", `आरंभ · ${HOME.hi}`] },
+               hi: ["रामायण पाठ", `आरंभ · ${HOME.hi}`], venue: HOME },
     { day: 21, en: ["Purnahuti", `Completion of Ramayan Path · ${HOME.en}`],
-               hi: ["पूर्णाहुति", `रामायण पाठ का समापन · ${HOME.hi}`] },
+               hi: ["पूर्णाहुति", `रामायण पाठ का समापन · ${HOME.hi}`], venue: HOME },
     { day: 22, en: ["Haldi", `Afternoon · ${HOME.en}`],
-               hi: ["हल्दी", `दोपहर · ${HOME.hi}`] },
+               hi: ["हल्दी", `दोपहर · ${HOME.hi}`], venue: HOME },
     { day: 22, en: ["Sangeet Night", `Evening · ${HOME.en}`],
-               hi: ["संगीत संध्या", `शाम · ${HOME.hi}`] },
+               hi: ["संगीत संध्या", `शाम · ${HOME.hi}`], venue: HOME },
     { day: 23, en: ["Parchawan", `4:00 PM · ${HOME.en}`],
-               hi: ["परछावन", `शाम 4:00 बजे · ${HOME.hi}`] },
+               hi: ["परछावन", `शाम 4:00 बजे · ${HOME.hi}`], venue: HOME },
     { day: 23, en: ["Baraat Departure", `Evening · Leaves for ${RESORT.en}`],
-               hi: ["बारात प्रस्थान", `शाम · ${RESORT.hi} के लिए प्रस्थान`] },
+               hi: ["बारात प्रस्थान", `शाम · ${RESORT.hi} के लिए प्रस्थान`], venue: HOME },
     { day: 24, en: ["Carnival", `10:00 AM · ${RESORT.en}`],
-               hi: ["कार्निवल", `सुबह 10:00 बजे · ${RESORT.hi}`] },
+               hi: ["कार्निवल", `सुबह 10:00 बजे · ${RESORT.hi}`], venue: RESORT },
     { day: 24, en: ["Wedding Ceremony", `6:00 PM · ${RESORT.en}`],
-               hi: ["विवाह संस्कार", `शाम 6:00 बजे · ${RESORT.hi}`] },
+               hi: ["विवाह संस्कार", `शाम 6:00 बजे · ${RESORT.hi}`], venue: RESORT },
     { day: 25, en: ["Bidai", RESORT.en],
-               hi: ["विदाई", RESORT.hi] },
+               hi: ["विदाई", RESORT.hi], venue: RESORT },
     { day: 26, en: ["Reception", `7:00 PM · ${PALACE.en}`],
-               hi: ["प्रीतिभोज", `शाम 7:00 बजे · ${PALACE.hi}`] },
+               hi: ["प्रीतिभोज", `शाम 7:00 बजे · ${PALACE.hi}`], venue: PALACE },
   ],
   bride: [
     { day: 23, en: ["Mehendi", `2:00 PM · ${RESORT.en}`],
-               hi: ["मेहंदी", `दोपहर 2:00 बजे · ${RESORT.hi}`] },
+               hi: ["मेहंदी", `दोपहर 2:00 बजे · ${RESORT.hi}`], venue: RESORT },
     { day: 23, en: ["Sangeet Night", `7:00 PM onwards · ${RESORT.en}`],
-               hi: ["संगीत संध्या", `शाम 7:00 बजे से · ${RESORT.hi}`] },
+               hi: ["संगीत संध्या", `शाम 7:00 बजे से · ${RESORT.hi}`], venue: RESORT },
     { day: 24, en: ["Carnival", `10:00 AM · ${RESORT.en}`],
-               hi: ["कार्निवल", `सुबह 10:00 बजे · ${RESORT.hi}`] },
+               hi: ["कार्निवल", `सुबह 10:00 बजे · ${RESORT.hi}`], venue: RESORT },
     { day: 24, en: ["Wedding Ceremony", `6:00 PM · ${RESORT.en}`],
-               hi: ["विवाह संस्कार", `शाम 6:00 बजे · ${RESORT.hi}`] },
+               hi: ["विवाह संस्कार", `शाम 6:00 बजे · ${RESORT.hi}`], venue: RESORT },
     { day: 25, en: ["Bidai", RESORT.en],
-               hi: ["विदाई", RESORT.hi] },
+               hi: ["विदाई", RESORT.hi], venue: RESORT },
   ],
 };
 
@@ -102,6 +111,8 @@ function render() {
   document.documentElement.lang = lang;
   document.title = `${t.names} · ${t.date.replace(/ · /g, " ")}`;
   document.querySelectorAll("[data-t]").forEach((n) => { n.textContent = t[n.dataset.t]; });
+  const days = Math.ceil((new Date(2026, 10, 24) - new Date().setHours(0, 0, 0, 0)) / 86400000);
+  document.getElementById("countdown").textContent = days > 0 ? t.daysToGo(days) : days === 0 ? t.today : "";
   document.querySelectorAll("[data-lang]").forEach((b) => {
     b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
   });
@@ -110,9 +121,14 @@ function render() {
       const [name, detail] = ev[lang];
       const li = el("li", "event");
       const when = el("div", "when");
-      when.append(el("div", "day", ev.day), el("div", "month", t.month));
+      const weekday = new Date(2026, 10, ev.day).toLocaleDateString(lang === "hi" ? "hi-IN" : "en-IN", { weekday: lang === "hi" ? "long" : "short" });
+      when.append(el("div", "day", ev.day), el("div", "month", t.month), el("div", "weekday", weekday));
       const body = el("div");
-      body.append(el("h2", null, name), el("p", null, detail));
+      const map = el("a", "directions", `📍 ${t.directions}`);
+      map.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ev.venue.map)}`;
+      map.target = "_blank";
+      map.rel = "noopener";
+      body.append(el("h2", null, name), el("p", null, detail), map);
       li.append(when, body);
       return li;
     }));

@@ -5,16 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ayush &amp; Vedika · 24 Nov 2026</title>
   <meta name="description" content="Wedding invitation of Ayush & Vedika — 24 November 2026">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <!-- Link preview on WhatsApp / social apps -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ayushiiism.github.io/ayush_marriage_invitation/">
+  <meta property="og:title" content="Ayush &amp; Vedika · 24 Nov 2026">
+  <meta property="og:description" content="With joy, we invite you to celebrate our wedding. Tap to open the invitation.">
+  <meta property="og:image" content="https://ayushiiism.github.io/ayush_marriage_invitation/images/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=202610301914">
+  <link rel="stylesheet" href="css/style.css?v=202610301930">
 </head>
 <body data-view="home">
   <div class="backdrop"></div>
   <div class="photo-panel"></div>
-  <!-- Background song: put your file at audio/song.mp3 -->
-  <audio id="song" src="audio/song.mp3" loop preload="auto"></audio>
+  <!-- Background song (AAC, compressed for mobile data) -->
+  <audio id="song" src="audio/song.m4a" loop preload="auto"></audio>
   <button id="music-toggle" class="music-toggle" type="button" hidden aria-label="Play music"></button>
 
   <!-- Home -->
@@ -27,6 +37,7 @@
       <h1 class="names script" data-t="names"></h1>
       <div class="divider"></div>
       <p class="date" data-t="date"></p>
+      <p class="countdown" id="countdown"></p>
       <p class="tap-hint" data-t="tap"></p>
     </div>
   </section>
@@ -75,6 +86,6 @@
     </main>
   </section>
 
-  <script src="js/app.js?v=202610301914"></script>
+  <script src="js/app.js?v=202610301930"></script>
 </body>
 </html>
