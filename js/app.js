@@ -44,17 +44,17 @@ const TEXT = {
 const HOME = {
   en: "Residence · Kazakpur Colony, Opp. Taramandal, near Bombay Security Office",
   hi: "निवास स्थान · कजाकपुर कॉलोनी, तारामंडल के सामने, बॉम्बे सिक्योरिटी ऑफिस के पास",
-  map: "Kazakpur Colony, Taramandal, Gorakhpur",
+  map: "https://maps.app.goo.gl/Nkf8X6ZeYj5HGgmu7",
 };
 const RESORT = {
   en: "Moon & Mars Resort, Kanpur",
   hi: "मून एंड मार्स रिज़ॉर्ट, कानपुर",
-  map: "Moon & Mars Resort, Kanpur",
+  map: "https://maps.app.goo.gl/cAZpXNdvJKgPFJTbA",
 };
 const PALACE = {
   en: "Manokamna Palace, Bhagat Chauraha, Gorakhpur",
   hi: "मनोकामना पैलेस, भगत चौराहा, गोरखपुर",
-  map: "Manokamna Palace, Bhagat Chauraha, Gorakhpur",
+  map: "https://maps.app.goo.gl/tjnWemwgJgrRFRZR9",
 };
 
 // ===== Functions: edit dates, names and details here =====
@@ -125,7 +125,7 @@ function render() {
       when.append(el("div", "day", ev.day), el("div", "month", t.month), el("div", "weekday", weekday));
       const body = el("div");
       const map = el("a", "directions", `📍 ${t.directions}`);
-      map.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ev.venue.map)}`;
+      map.href = ev.venue.map;
       map.target = "_blank";
       map.rel = "noopener";
       body.append(el("h2", null, name), el("p", null, detail), map);
