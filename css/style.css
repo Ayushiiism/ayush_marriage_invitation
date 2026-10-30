@@ -23,6 +23,7 @@ body[data-view="home"]     { --bg-image: url("../images/home-wide.jpg");  --pane
 body[data-view="families"] { --bg-image: url("../images/families.jpg");   --panel-pos: center 35%; }
 body[data-view="groom"]    { --bg-image: url("../images/groom-bg.jpg");   --panel-pos: center 30%; }
 body[data-view="bride"]    { --bg-image: url("../images/bride-bg.jpg");   --panel-pos: center 25%; }
+body[data-view="gallery"]  { --bg-image: url("../images/gallery/8.jpg");  --panel-pos: center 30%; }
 
 /* Full-screen photo behind everything (a fixed layer — works on iPhone, unlike background-attachment: fixed) */
 .backdrop {
@@ -59,7 +60,16 @@ a { color: inherit; text-decoration: none; }
 
 /* Hindi: Devanagari has no script face, so use the Hindi serif and tone down the spacing */
 :lang(hi) .script { font-family: "Tiro Devanagari Hindi", serif; }
-:lang(hi) .landing .names { font-size: clamp(2.8rem, 10vw, 6rem); line-height: 1.4; }
+:lang(hi) .landing .blessing {
+  font-family: "Tiro Devanagari Hindi", serif;
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
+  color: var(--gold);
+  margin-bottom: 14px;
+  opacity: 0.95;
+  animation: fadeUp 1.4s ease both;
+}
+
+.landing .names { font-size: clamp(2.8rem, 10vw, 6rem); line-height: 1.4; }
 :lang(hi) .page h1 { font-size: clamp(2.2rem, 7vw, 3.5rem); line-height: 1.4; }
 :lang(hi) .choice .label { font-size: 2.1rem; }
 :lang(hi) .date, :lang(hi) .tap-hint, :lang(hi) .subtitle, :lang(hi) .back, :lang(hi) .choice .who { letter-spacing: 0; }
@@ -274,9 +284,12 @@ a { color: inherit; text-decoration: none; }
 .event .when .month { font-size: 0.95rem; letter-spacing: 0.2em; text-transform: uppercase; }
 .event .when .weekday { font-size: 0.9rem; margin-top: 4px; color: var(--cream); opacity: 0.8; }
 
+.event .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .event .directions {
   display: inline-block;
-  margin-top: 10px;
+  font-family: inherit;
+  background: transparent;
+  cursor: pointer;
   padding: 4px 14px;
   font-size: 1rem;
   border: 1px solid var(--gold);
@@ -287,6 +300,62 @@ a { color: inherit; text-decoration: none; }
 
 .event h2 { font-size: 1.9rem; color: var(--gold); font-weight: 600; }
 .event p { font-size: 1.1rem; opacity: 0.95; overflow-wrap: anywhere; }
+
+/* ===== Gallery ===== */
+.gallery-link {
+  display: inline-block;
+  margin-top: 32px;
+  padding: 10px 28px;
+  font-size: 1.2rem;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  color: var(--gold);
+  background: rgba(30, 10, 14, 0.55);
+}
+.gallery-link:hover, .gallery-link:focus-visible { background: var(--gold); color: #2a0d12; }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  margin-top: 32px;
+}
+.gallery-item {
+  aspect-ratio: 3 / 4;
+  padding: 0;
+  border: 1px solid rgba(232, 198, 122, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(30, 10, 14, 0.6);
+  cursor: zoom-in;
+}
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+.gallery-item:hover img { transform: scale(1.05); }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: rgba(10, 3, 5, 0.94);
+}
+.lightbox img { max-width: 94vw; max-height: 88vh; border-radius: 8px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6); }
+.lightbox button {
+  position: absolute;
+  border: 0;
+  background: rgba(30, 10, 14, 0.6);
+  color: var(--gold);
+  font-size: 2.4rem;
+  line-height: 1;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.lb-close { top: 16px; right: 16px; }
+.lb-prev { left: 12px; top: 50%; transform: translateY(-50%); }
+.lb-next { right: 12px; top: 50%; transform: translateY(-50%); }
 
 /* ===== Animations ===== */
 @keyframes fadeUp {

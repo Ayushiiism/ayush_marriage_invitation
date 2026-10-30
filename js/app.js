@@ -18,6 +18,10 @@ const TEXT = {
     directions: "Directions",
     daysToGo: (n) => (n === 1 ? "1 day to go" : `${n} days to go`),
     today: "The big day is today!",
+    calendar: "Add to calendar",
+    galleryLink: "📷 Our Moments",
+    galleryTitle: "Our Moments",
+    gallerySub: "From our engagement · 7 May",
   },
   hi: {
     names: "आयुष संग वेदिका",
@@ -37,6 +41,10 @@ const TEXT = {
     directions: "रास्ता देखें",
     daysToGo: (n) => `${n} दिन शेष`,
     today: "आज शुभ विवाह का दिन है!",
+    calendar: "कैलेंडर में जोड़ें",
+    galleryLink: "📷 हमारी यादें",
+    galleryTitle: "हमारी यादें",
+    gallerySub: "हमारी सगाई से · 7 मई",
   },
 };
 
@@ -128,11 +136,50 @@ function render() {
       map.href = ev.venue.map;
       map.target = "_blank";
       map.rel = "noopener";
-      body.append(el("h2", null, name), el("p", null, detail), map);
+      const cal = el("button", "directions", `🗓 ${t.calendar}`);
+      cal.type = "button";
+      cal.addEventListener("click", () => addToCalendar(ev));
+      const actions = el("div", "actions");
+      actions.append(map, cal);
+      body.append(el("h2", null, name), el("p", null, detail), actions);
       li.append(when, body);
       return li;
     }));
   });
+}
+
+// ===== Add to calendar (.ics file; opens the phone's calendar app) =====
+function addToCalendar(ev) {
+  const [name, detail] = ev.en;
+  const pad = (n) => String(n).padStart(2, "0");
+  // Exact time if the detail has one (e.g. "6:00 PM"), otherwise an all-day entry
+  const m = detail.match(/(\d{1,2}):(\d{2}) (AM|PM)/);
+  let when;
+  if (m) {
+    const h = (+m[1] % 12) + (m[3] === "PM" ? 12 : 0);
+    const start = new Date(Date.UTC(2026, 10, ev.day, h, +m[2]) - 330 * 60000); // IST → UTC
+    const end = new Date(start.getTime() + 3 * 3600000);
+    const fmt = (d) => d.toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z";
+    when = `DTSTART:${fmt(start)}\r\nDTEND:${fmt(end)}`;
+  } else {
+    when = `DTSTART;VALUE=DATE:202611${pad(ev.day)}\r\nDTEND;VALUE=DATE:202611${pad(ev.day + 1)}`;
+  }
+  const esc = (x) => x.replace(/[,;\\]/g, "\\$&");
+  const ics = [
+    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Ayush & Vedika//Wedding//EN", "BEGIN:VEVENT",
+    `UID:${ev.day}-${name.replace(/\W/g, "")}@ayush-vedika`,
+    `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, "").slice(0, 15)}Z`,
+    when,
+    `SUMMARY:${esc(`${name} · Ayush & Vedika`)}`,
+    `LOCATION:${esc(ev.venue.en)}`,
+    `DESCRIPTION:${esc(`${detail} · Directions: ${ev.venue.map}`)}`,
+    "END:VEVENT", "END:VCALENDAR",
+  ].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
+  a.download = `${name.replace(/\W+/g, "-")}.ics`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 10000);
 }
 
 document.querySelectorAll("[data-lang]").forEach((b) => {
@@ -144,7 +191,7 @@ document.querySelectorAll("[data-lang]").forEach((b) => {
 });
 
 // ===== Views (one page, so the music keeps playing) =====
-const VIEWS = ["home", "families", "groom", "bride"];
+const VIEWS = ["home", "families", "groom", "bride", "gallery"];
 function show() {
   const id = location.hash.slice(1);
   const current = VIEWS.includes(id) ? id : "home";
@@ -192,6 +239,51 @@ document.addEventListener("click", function first() {
   song.dataset.started = "1";
   document.removeEventListener("click", first);
 });
+
+// ===== Photo gallery =====
+const PHOTOS = 10;
+const gallery = document.querySelector(".gallery");
+const lightbox = document.getElementById("lightbox");
+const lbImg = lightbox.querySelector("img");
+let current = 0;
+for (let i = 1; i <= PHOTOS; i++) {
+  const b = el("button", "gallery-item");
+  b.type = "button";
+  b.setAttribute("aria-label", `Photo ${i}`);
+  const img = el("img");
+  img.src = `images/gallery/${i}-thumb.jpg`;
+  img.alt = "";
+  img.loading = "lazy";
+  b.append(img);
+  b.addEventListener("click", () => openPhoto(i));
+  gallery.append(b);
+}
+function openPhoto(i) {
+  current = ((i - 1 + PHOTOS) % PHOTOS) + 1;
+  lbImg.src = `images/gallery/${current}.jpg`;
+  lightbox.hidden = false;
+}
+const closePhoto = () => { lightbox.hidden = true; };
+lightbox.querySelector(".lb-close").addEventListener("click", closePhoto);
+lightbox.querySelector(".lb-prev").addEventListener("click", () => openPhoto(current - 1));
+lightbox.querySelector(".lb-next").addEventListener("click", () => openPhoto(current + 1));
+lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closePhoto(); });
+document.addEventListener("keydown", (e) => {
+  if (lightbox.hidden) return;
+  if (e.key === "Escape") closePhoto();
+  if (e.key === "ArrowLeft") openPhoto(current - 1);
+  if (e.key === "ArrowRight") openPhoto(current + 1);
+});
+// Swipe left/right on phones
+let touchX = null;
+lightbox.addEventListener("touchstart", (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+lightbox.addEventListener("touchend", (e) => {
+  if (touchX == null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 50) openPhoto(current + (dx < 0 ? 1 : -1));
+  touchX = null;
+});
+window.addEventListener("hashchange", closePhoto);
 
 render();
 show();

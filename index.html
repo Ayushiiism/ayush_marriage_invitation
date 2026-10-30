@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=202610301945">
+  <link rel="stylesheet" href="css/style.css?v=202610302000">
 </head>
 <body data-view="home">
   <div class="backdrop"></div>
@@ -34,6 +34,7 @@
       <button type="button" data-lang="hi">हिंदी</button>
     </div>
     <div class="landing" id="open-invite" role="button" tabindex="0">
+      <p class="blessing" lang="hi">॥ श्री गणेशाय नमः ॥</p>
       <h1 class="names script" data-t="names"></h1>
       <div class="divider"></div>
       <p class="date" data-t="date"></p>
@@ -61,6 +62,7 @@
           <div class="who" data-t="brideFamily"></div>
         </a>
       </div>
+      <a class="gallery-link" href="#gallery" data-t="galleryLink"></a>
     </main>
   </section>
 
@@ -86,6 +88,24 @@
     </main>
   </section>
 
-  <script src="js/app.js?v=202610301945"></script>
+  <!-- Engagement photos -->
+  <section id="gallery" class="view" hidden>
+    <main class="page">
+      <a class="back" href="#families" data-t="back"></a>
+      <h1 class="script" data-t="galleryTitle"></h1>
+      <div class="divider"></div>
+      <p class="subtitle" data-t="gallerySub"></p>
+      <div class="gallery"></div>
+    </main>
+  </section>
+
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true">
+    <button type="button" class="lb-close" aria-label="Close">×</button>
+    <button type="button" class="lb-prev" aria-label="Previous photo">‹</button>
+    <img alt="">
+    <button type="button" class="lb-next" aria-label="Next photo">›</button>
+  </div>
+
+  <script src="js/app.js?v=202610302000"></script>
 </body>
 </html>
